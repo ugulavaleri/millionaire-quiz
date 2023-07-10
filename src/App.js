@@ -1,25 +1,76 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./components/style.scss";
+import QuestionWrapper from "./components/questionWrapper";
+import { data } from "./components/data";
+import { MoneyObject } from "./components/data";
+import Timeout from "./components/timeout";
+import Introduction from "./components/introduction";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [userName, setUserName] = useState("");
+    const [questionNumber, setQuestionNumber] = useState(1);
+    const [stop, setStop] = useState(false);
+    const [earnedMoney, setEarnMoney] = useState("$ 0");
+
+    useEffect(() => {
+        questionNumber > 1 &&
+            setEarnMoney(
+                MoneyObject.find((m) => m.id === questionNumber - 1).amount
+            );
+    }, [questionNumber, MoneyObject]);
+
+    return (
+        <div className="container">
+            {userName.trim() ? (
+                <>
+                    <div className="mainPart">
+                        {stop ? (
+                            <h1 className="loseGameText">
+                                You earned {earnedMoney}
+                            </h1>
+                        ) : (
+                            <>
+                                <div className="timerDiv">
+                                    <div className="timerCircle">
+                                        <Timeout
+                                            setStop={setStop}
+                                            questionNumber={questionNumber}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="questionDiv">
+                                    <QuestionWrapper
+                                        data={data}
+                                        questionNumber={questionNumber}
+                                        setQuestionNumber={setQuestionNumber}
+                                        setStop={setStop}
+                                    />
+                                </div>
+                            </>
+                        )}
+                    </div>
+
+                    <div className="moneyPart">
+                        <ul>
+                            {MoneyObject.map((m) => (
+                                <li
+                                    key={m.id}
+                                    className={
+                                        questionNumber === m.id ? "active" : ""
+                                    }
+                                >
+                                    <span className="moneyNumber">{m.id}</span>
+                                    <span>{m.amount}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </>
+            ) : (
+                <Introduction setUserName={setUserName} />
+            )}
+        </div>
+    );
 }
 
 export default App;

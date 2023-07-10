@@ -1,0 +1,207 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+    font-family: "Montserrat", sans-serif;
+    font-family: "Open Sans", sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-family: "Roboto", sans-serif;
+}
+
+.introductionContainer {
+    height: 150px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    position: relative;
+    inset: 0;
+    margin: auto;
+    input {
+        width: 100%;
+        height: 40px;
+        text-align: center;
+        outline: none;
+        border-radius: 14px;
+        font-size: 16px;
+        border: none;
+        background-color: #3b127cc2;
+        color: #fff;
+        caret-color: #fff;
+
+        &::placeholder {
+            color: #fff;
+        }
+    }
+    button {
+        width: 50%;
+        height: 30px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        background-color: #22074dc2;
+        color: #fff;
+        cursor: pointer;
+    }
+}
+
+.container {
+    height: 100vh;
+    background-color: #020230;
+
+    display: flex;
+    color: #fff;
+    .mainPart {
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #020230),
+            url("../images/bg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 72%;
+        display: flex;
+        flex-direction: column;
+
+        .loseGameText {
+            position: relative;
+            inset: 0;
+            margin: auto;
+        }
+
+        .timerDiv {
+            height: 50%;
+            position: relative;
+            .timerCircle {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                border: 5px solid #fff;
+                font-size: 20px;
+                font-weight: 600;
+
+                position: absolute;
+                bottom: 0;
+                left: 60px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        .questionDiv {
+            height: 50%;
+            .QuestionsWrapper {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                text-align: center;
+                .questionBox {
+                    width: 70%;
+                    padding: 20px 0px;
+                    border: 2px solid #fff;
+                    background: linear-gradient(#0e0124, #22074d);
+                    border-radius: 14px;
+                }
+                .answer {
+                    min-width: 100%;
+                    border: 1px solid #fff;
+                    padding: 10px;
+                    margin-bottom: 20px;
+                    background: linear-gradient(#0e0124, #22074d);
+                    border-radius: 15px;
+                    font-size: 18px;
+                    font-weight: 300;
+                    transition: background-color 0.2s;
+                    cursor: pointer;
+                    &:hover {
+                        background: mediumslateblue;
+                    }
+                }
+                .answer.active {
+                    background: mediumslateblue;
+                }
+                .answer.correct {
+                    animation: correctAnswer 3s ease forwards;
+                }
+                .answer.incorrect {
+                    animation: incorrectAnswer 3s ease forwards;
+                }
+                .answers {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    width: 75%;
+                    gap: 20px;
+                    div {
+                        width: 60%;
+                    }
+                }
+            }
+        }
+    }
+    .moneyPart {
+        background-color: #020230;
+        width: 28%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        ul {
+            list-style: none;
+            font-size: 18px;
+            width: 70%;
+            padding: 20px;
+            li {
+                display: flex;
+                padding: 5px;
+                border-radius: 4px;
+                .moneyNumber {
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
+
+// if answer is correct
+@keyframes correctAnswer {
+    0%,
+    22%,
+    42% {
+        background: mediumslateblue;
+    }
+    20%,
+    40%,
+    60% {
+        background: linear-gradient(#0e0124, #22074d);
+    }
+    62%,
+    100% {
+        background: green;
+    }
+}
+
+// if answer is incorrect
+@keyframes incorrectAnswer {
+    0%,
+    22%,
+    42% {
+        background: mediumslateblue;
+    }
+    20%,
+    40%,
+    60% {
+        background: linear-gradient(#0e0124, #22074d);
+    }
+    62%,
+    100% {
+        background: red;
+    }
+}
+
+.active {
+    background-color: lightcoral;
+}
