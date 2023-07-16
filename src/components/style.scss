@@ -68,6 +68,17 @@
             position: relative;
             inset: 0;
             margin: auto;
+            button {
+                width: 100%;
+                margin-top: 30px;
+                height: 40px;
+                border-radius: 10px;
+                border: none;
+                font-size: 18px;
+                color: #fff;
+                background-color: mediumslateblue;
+                cursor: pointer;
+            }
         }
 
         .timerDiv {
@@ -165,6 +176,9 @@
         }
     }
 }
+.active {
+    background-color: lightcoral;
+}
 
 // if answer is correct
 @keyframes correctAnswer {
@@ -200,8 +214,4 @@
     100% {
         background: red;
     }
-}
-
-.active {
-    background-color: lightcoral;
 }

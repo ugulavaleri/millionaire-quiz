@@ -19,15 +19,22 @@ function App() {
             );
     }, [questionNumber, MoneyObject]);
 
+    const handleReset = () => {
+        setQuestionNumber(1);
+        setStop(false);
+        setEarnMoney("$ 0");
+    };
+
     return (
         <div className="container">
             {userName.trim() ? (
                 <>
                     <div className="mainPart">
                         {stop ? (
-                            <h1 className="loseGameText">
-                                You earned {earnedMoney}
-                            </h1>
+                            <div className="loseGameText">
+                                <h1>You earned {earnedMoney}</h1>
+                                <button onClick={handleReset}>Reset</button>
+                            </div>
                         ) : (
                             <>
                                 <div className="timerDiv">

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function Timeout({ setStop, questionNumber }) {
-    const [time, setTime] = useState(30);
+    const [time, setTime] = useState(20);
 
     useEffect(() => {
         if (time === 0) return setStop(true);
@@ -11,11 +11,11 @@ function Timeout({ setStop, questionNumber }) {
         return () => {
             clearInterval(interval);
         };
-    }, []);
+    }, [time]);
 
     // if question number changed, reset timer
     useEffect(() => {
-        setTime(30);
+        setTime(20);
     }, [questionNumber]);
 
     return time;
